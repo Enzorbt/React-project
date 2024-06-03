@@ -1,11 +1,18 @@
 ﻿import React, { useState } from 'react';
+import ObjectsType from "../types/ObjectsType.tsx";
 
 interface AdvancedSearchBarProps {
-    // Your props here
+    setSearchResults: React.Dispatch<React.SetStateAction<ObjectsType | undefined>>;
 }
 
-const AdvancedSearchBar: React.FC<AdvancedSearchBarProps> = ({ /* Your props here */ }) => {
-    // Your code here
+const AdvancedSearchBar: React.FC<AdvancedSearchBarProps> = ({ setSearchResults }) => {
+    
+    
+    return (
+        <>
+            
+        </>
+    );
 };
 
 export default AdvancedSearchBar;

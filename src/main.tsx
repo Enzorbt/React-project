@@ -26,8 +26,16 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                     <Route 
                         path="/" 
                         element={<App />}>
-                        <Route index element={<HomePage searchModel={searchModel} />} />
-                        <Route path="search" element={<AdvancedSearchPage/>} />
+                        <Route 
+                            index 
+                            element={<HomePage 
+                                searchModel={searchModel} />} />
+                        <Route 
+                            path="search" 
+                            element={<AdvancedSearchPage 
+                                objectModel={objectModel}
+                                searchModel={searchModel}
+                        />} />
                         <Route path="objects/:objectId" element={<ObjectPage/>} />
                     </Route>
                 </Routes>

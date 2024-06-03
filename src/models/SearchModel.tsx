@@ -6,7 +6,7 @@ import SearchParamsType from "../types/SearchParamsType.tsx";
 class SearchModel {
     private readonly baseURL: string;
     private readonly objectModel: ObjectModel;
-    private highlights: ObjectType[];
+    private readonly highlights: ObjectType[];
     
     constructor(baseURL: string, objectModel: ObjectModel) {
         this.baseURL = baseURL;
@@ -16,14 +16,28 @@ class SearchModel {
 
     async getHighlights(): Promise<ObjectType[]> {
         if (this.highlights.length === 0) {
-            const response = await this.searchObjects({ isHighlight: true, hasImages: true });
+            const response = await this.searchObjects({ 
+                q: null,
+                isHighlight: true,
+                isOnView: null,
+                artistOrCulture: null,
+                hasImages: true,
+                title: null,
+                tags: null,
+                departmentId: null,
+                medium: null,
+                geoLocation: null,
+                dateBegin: null,
+                dateEnd: null,
+                
+            });
             const objectIds = response.objectIDs.slice();
             for (let i = objectIds.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [objectIds[i], objectIds[j]] = [objectIds[j], objectIds[i]];
             }
             for (let i = 0; i < 20; i++) {
-                this.highlights.push(await this.objectModel.getObject(objectIds[i].toString()));
+                this.highlights.push(await this.objectModel.getObject(objectIds[i]));
             }
         }
         return this.highlights;
@@ -31,6 +45,7 @@ class SearchModel {
 
     async searchObjects(params: SearchParamsType): Promise<ObjectsType> {
         const queryString = this.buildQueryString(params);
+        console.log(queryString);
         try {
             const response = await fetch(`${this.baseURL}/search${queryString}`);
             if (!response.ok) {
@@ -53,15 +68,15 @@ class SearchModel {
             queryParams.push(`q=${encodeURIComponent(params.q)}`);
         }
 
-        if (params.isHighlight !== undefined) {
+        if (params.isHighlight) {
             queryParams.push(`isHighlight=${params.isHighlight}`);
         }
 
-        if (params.title !== undefined) {
+        if (params.title) {
             queryParams.push(`title=${params.title}`);
         }
 
-        if (params.tags !== undefined) {
+        if (params.tags) {
             queryParams.push(`tags=${params.tags}`);
         }
 
@@ -69,11 +84,11 @@ class SearchModel {
             queryParams.push(`departmentId=${params.departmentId}`);
         }
 
-        if (params.isOnView !== undefined) {
+        if (params.isOnView) {
             queryParams.push(`isOnView=${params.isOnView}`);
         }
 
-        if (params.artistOrCulture !== undefined) {
+        if (params.artistOrCulture) {
             queryParams.push(`artistOrCulture=${params.artistOrCulture}`);
         }
 
@@ -81,7 +96,7 @@ class SearchModel {
             queryParams.push(`medium=${encodeURIComponent(params.medium)}`);
         }
 
-        if (params.hasImages !== undefined) {
+        if (params.hasImages) {
             queryParams.push(`hasImages=${params.hasImages}`);
         }
 
@@ -89,7 +104,7 @@ class SearchModel {
             queryParams.push(`geoLocation=${encodeURIComponent(params.geoLocation)}`);
         }
 
-        if (params.dateBegin !== undefined && params.dateEnd !== undefined) {
+        if (params.dateBegin && params.dateEnd) {
             queryParams.push(`dateBegin=${params.dateBegin}`);
             queryParams.push(`dateEnd=${params.dateEnd}`);
         }
