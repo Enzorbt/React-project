@@ -8,6 +8,7 @@ const Footer: React.FC<FooterProps> = () => {
 
     return(
         <>
+            FOOTER
         </>
     )
 };
