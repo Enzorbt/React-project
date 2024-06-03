@@ -26,6 +26,7 @@ const Highlights: React.FC<HighlightsProps> = ({ searchModel }) => {
 
     return (
         <div>
+            HIGHLIGHTS:
             {highlights.map((highlight) => (
                 <Highlight key={highlight.objectID} highlight={highlight} />
             ))}
