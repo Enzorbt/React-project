@@ -6,7 +6,7 @@ import SearchParamsType from "../types/SearchParamsType.tsx";
 class SearchModel {
     private readonly baseURL: string;
     private readonly objectModel: ObjectModel;
-    private readonly highlights: ObjectType[];
+    private highlights: ObjectType[];
     
     constructor(baseURL: string, objectModel: ObjectModel) {
         this.baseURL = baseURL;
@@ -16,9 +16,14 @@ class SearchModel {
 
     async getHighlights(): Promise<ObjectType[]> {
         if (this.highlights.length === 0) {
-            const response = await this.searchObjects({ isHighlight: true });
-            for (const objectIDsKey in response.objectIDs) {
-                this.highlights.push(await this.objectModel.getObject(objectIDsKey));
+            const response = await this.searchObjects({ isHighlight: true, hasImages: true });
+            const objectIds = response.objectIDs.slice();
+            for (let i = objectIds.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [objectIds[i], objectIds[j]] = [objectIds[j], objectIds[i]];
+            }
+            for (let i = 0; i < 20; i++) {
+                this.highlights.push(await this.objectModel.getObject(objectIds[i].toString()));
             }
         }
         return this.highlights;
@@ -29,7 +34,7 @@ class SearchModel {
         try {
             const response = await fetch(`${this.baseURL}/search${queryString}`);
             if (!response.ok) {
-                throw new Error('Failed to search objects');
+                throw new Error('Failed to search objects, ' + response.statusText + ", " + response.json());
             }
             const searchResult = await response.json();
             return searchResult;
