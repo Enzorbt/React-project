@@ -14,19 +14,15 @@ class ObjectModel {
             console.log("used cashed object (id:" + cachedObject.objectID + ")");
             return cachedObject;
         }
-
-        try {
-            const response = await fetch(`${this.baseURL}/objects/${objectID}`);
-            if (!response.ok) {
-                throw new Error('Failed to fetch object');
-            }
-            const object = await response.json();
-            this.objects.push(object);
-            return object;
-        } catch (error) {
-            console.error(`Error fetching object ${objectID}:`, error);
-            throw error;
+        
+        const response = await fetch(`${this.baseURL}/objects/${objectID}`);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch object ${objectID}`);
         }
+        const object = await response.json();
+        this.objects.push(object);
+        return object;
+        
     }
 
 }

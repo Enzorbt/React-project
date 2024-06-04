@@ -13,9 +13,11 @@ import ObjectPage from './components/ObjectPage';
 import SearchModel from './models/SearchModel';
 import ObjectModel from "./models/ObjectModel.tsx";
 import FlashesProvider from "./providers/FlashesProvider.tsx";
+import DepartmentModel from "./models/DepartmentModel.tsx";
 
 const objectModel = new ObjectModel('https://collectionapi.metmuseum.org/public/collection/v1')
 const searchModel = new SearchModel('https://collectionapi.metmuseum.org/public/collection/v1', objectModel);
+const departmentModel = new DepartmentModel('https://collectionapi.metmuseum.org/public/collection/v1');
 
 ReactDOM.createRoot(document.getElementById('root')!).render(    
     <React.StrictMode>
@@ -35,6 +37,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                             element={<AdvancedSearchPage 
                                 objectModel={objectModel}
                                 searchModel={searchModel}
+                                departmentModel={departmentModel}
                         />} />
                         <Route path="objects/:objectId" element={<ObjectPage/>} />
                     </Route>
