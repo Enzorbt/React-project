@@ -1,8 +1,14 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SearchParamsType from '../types/SearchParamsType';
+import DepartmentModel from "../models/DepartmentModel.tsx";
+import DepartmentType from "../types/DepartmentType.tsx";
 
-const AdvancedSearchBar: React.FC = () => {
+interface AdvancedSearchBarProps {
+    departmentModel: DepartmentModel;
+}
+
+const AdvancedSearchBar: React.FC<AdvancedSearchBarProps> = ({ departmentModel }) => {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useState<SearchParamsType>({
         q: '',
@@ -15,12 +21,20 @@ const AdvancedSearchBar: React.FC = () => {
         medium: '',
         hasImages: false,
         geoLocation: '',
-        dateBegin: null,
-        dateEnd: null,
+        dateBegin: 0,
+        dateEnd: 0,
     });
 
-    const [useDepartmentId, setUseDepartmentId] = useState(false);
+    const [departments, setDepartments] = useState<DepartmentType[]>([]);
     const [useDates, setUseDates] = useState(false);
+
+    useEffect(() => {
+        departmentModel.getDepartments().then(
+            setDepartments
+        ).catch(
+            // Handle error
+        );
+    }, [departmentModel]);
 
     const setQ = (q: string) => {
         setSearchParams({ ...searchParams, q });
@@ -74,11 +88,7 @@ const AdvancedSearchBar: React.FC = () => {
         event.preventDefault();
         let queryString = '';
         for (const [key, value] of Object.entries(searchParams)) {
-            if (key === 'departmentId') {
-                if (useDepartmentId && value !== null && value !== '') {
-                    queryString += `${key}=${encodeURIComponent(value.toString())}&`;
-                }
-            } else if (key === 'dateBegin' || key === 'dateEnd') {
+            if (key === 'dateBegin' || key === 'dateEnd') {
                 if (useDates && value !== null && value !== '') {
                     queryString += `${key}=${encodeURIComponent(value.toString())}&`;
                 }
@@ -132,29 +142,20 @@ const AdvancedSearchBar: React.FC = () => {
                     <span className="ml-2 text-white">Tags</span>
                 </label>
                 <label className="mr-4 flex items-center">
-                    <input
-                        type="number"
+                    <select
                         name="departmentId"
-                        value={searchParams.departmentId ?? 0}
-                        onChange={(event) => {
-                            const value = Number(event.target.value);
-                            if (value >= 0) {
-                                setDepartmentId(value);
-                            }
-                        }}
+                        value={searchParams.departmentId ?? ''}
+                        onChange={(event) => setDepartmentId(Number(event.target.value))}
                         className="border border-gray-500 bg-transparent rounded-full px-4 py-2 text-white"
-                    />
-                    <span className="ml-2 text-white">Department ID</span>
-                </label>
-                <label className="mr-4 flex items-center">
-                    <input
-                        type="checkbox"
-                        name="useDepartmentId"
-                        checked={useDepartmentId}
-                        onChange={(event) => setUseDepartmentId(event.target.checked)}
-                        className="form-checkbox h-5 w-5 text-indigo-600"
-                    />
-                    <span className="ml-2 text-white">Use Department ID</span>
+                    >
+                        <option value="">Select a department</option>
+                        {departments.map(department => (
+                            <option key={department.departmentId} value={department.departmentId}>
+                                {department.displayName}
+                            </option>
+                        ))}
+                    </select>
+                    <span className="ml-2 text-white">Department</span>
                 </label>
                 <label className="mr-4 flex items-center">
                     <input
@@ -210,7 +211,7 @@ const AdvancedSearchBar: React.FC = () => {
                     <input
                         type="number"
                         name="dateBegin"
-                        value={searchParams.dateBegin ?? 0}
+                        value={searchParams.dateBegin ?? '0'}
                         onChange={(event) => setDateBegin(Number(event.target.value))}
                         className="border border-gray-500 bg-transparent rounded-full px-4 py-2 text-white"
                     />
@@ -220,7 +221,7 @@ const AdvancedSearchBar: React.FC = () => {
                     <input
                         type="number"
                         name="dateEnd"
-                        value={searchParams.dateEnd ?? 0}
+                        value={searchParams.dateEnd ?? '0'}
                         onChange={(event) => setDateEnd(Number(event.target.value))}
                         className="border border-gray-500 bg-transparent rounded-full px-4 py-2 text-white"
                     />

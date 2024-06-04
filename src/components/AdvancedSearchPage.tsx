@@ -7,38 +7,53 @@ import AdvancedSearchBar from "./AdvancedSearchBar.tsx";
 import SearchResults from "./SearchResults.tsx";
 import ObjectModel from "../models/ObjectModel.tsx";
 import {useFlashes} from "../providers/FlashesProvider.tsx";
+import DepartmentModel from "../models/DepartmentModel.tsx";
 
 interface AdvancedSearchPageProps {
     searchModel: SearchModel;
     objectModel: ObjectModel;
+    departmentModel: DepartmentModel;
 }
 
 const AdvancedSearchPage: React.FC<AdvancedSearchPageProps> = ({
                                                                    searchModel, 
-                                                                   objectModel 
-}: { 
-    searchModel: SearchModel, 
-    objectModel: ObjectModel
+                                                                   objectModel,
+                                                                   departmentModel
 }) => {
     const { setFlashMessage } = useFlashes();
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const [searchResults, setSearchResults] = useState<ObjectsType>();
+    const [currentPage, setCurrentPage] = useState(() => {
+        const page = searchParams.get('page');
+        return page ? Number(page) : 1;
+    });
+    const [loading, setLoading] = useState(false);
+
+    const areAllParamsNull = (params: SearchParamsType): boolean => {
+        return Object.values(params).every(value => value === null || value === '*');
+    };
 
     useEffect(() => {
         const searchParamsObj: SearchParamsType = {
-            q: searchParams.get('q') ?? '*',
-            isHighlight: searchParams.get('isHighlight') === 'true',
-            title: searchParams.get('title') === 'true',
-            tags: searchParams.get('tags') === 'true',
+            q: searchParams.get('q') === null ? '*' : searchParams.get('q'),
+            isHighlight: searchParams.get('isHighlight') === null ? null : searchParams.get('isHighlight') === 'true',
+            title: searchParams.get('title') === null ? null : searchParams.get('title') === 'true',
+            tags: searchParams.get('tags') === null ? null : searchParams.get('tags') === 'true',
             departmentId: searchParams.get('departmentId') ? Number(searchParams.get('departmentId')) : null,
-            isOnView: searchParams.get('isOnView') === 'true',
-            artistOrCulture: searchParams.get('artistOrCulture') === 'true',
+            isOnView: searchParams.get('isOnView') === null ? null : searchParams.get('isOnView') === 'true',
+            artistOrCulture: searchParams.get('artistOrCulture') === null ? null : searchParams.get('artistOrCulture') === 'true',
             medium: searchParams.get('medium'),
-            hasImages: searchParams.get('hasImages') === 'true',
+            hasImages: searchParams.get('hasImages') === null ? null : searchParams.get('hasImages') === 'true',
             geoLocation: searchParams.get('geoLocation'),
             dateBegin: searchParams.get('dateBegin') ? Number(searchParams.get('dateBegin')) : null,
             dateEnd: searchParams.get('dateEnd') ? Number(searchParams.get('dateEnd')) : null,
         };
+
+        if (areAllParamsNull(searchParamsObj)) {
+            setSearchResults(undefined);
+            setLoading(false);
+            return; // All parameters are null, return early
+        }
         
         searchModel.searchObjects(searchParamsObj).then(
             setSearchResults
@@ -50,13 +65,25 @@ const AdvancedSearchPage: React.FC<AdvancedSearchPageProps> = ({
         });
     }, [searchParams, searchModel, setFlashMessage]);
 
+    useEffect(() => {
+        setSearchParams(prevParams => {
+            const newParams = new URLSearchParams(prevParams);
+            newParams.set('page', currentPage.toString());
+            return newParams;
+        });
+    }, [currentPage, setSearchParams]);
+
     return (
         <>
-            <AdvancedSearchBar/>
+            <AdvancedSearchBar departmentModel={departmentModel}/>
             
-            <SearchResults 
+            <SearchResults
                 searchResults={searchResults}
                 objectModel={objectModel}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                loading={loading}
+                setLoading={setLoading}
             />
         </>
     );
