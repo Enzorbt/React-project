@@ -5,7 +5,7 @@ interface HighlightProps {
     highlight: ObjectType;
 }
 
-const Highlight: React.FC<HighlightProps> = ({ highlight }) => {
+const CarrouselElement: React.FC<HighlightProps> = ({ highlight }) => {
     return (
         <div className="bg-white p-4 rounded-lg shadow-md h-96 flex flex-col justify-center items-center">
             <img 
@@ -24,4 +24,4 @@ const Highlight: React.FC<HighlightProps> = ({ highlight }) => {
     );
 };
 
-export default Highlight;
+export default CarrouselElement;
