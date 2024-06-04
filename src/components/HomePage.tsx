@@ -16,7 +16,23 @@ const HomePage: React.FC<HomePageProps> = ({ searchModel }) => {
 
     useEffect(() => {
         searchModel
-            .getHighlights()
+            .getCarrouselItems(
+                {
+                    q: null,
+                    isHighlight: true,
+                    isOnView: null,
+                    artistOrCulture: null,
+                    hasImages: true,
+                    title: null,
+                    tags: null,
+                    departmentId: null,
+                    medium: null,
+                    geoLocation: null,
+                    dateBegin: null,
+                    dateEnd: null,
+                }, 
+                20
+            )
             .then(setHighlights)
             .catch((error) => {
                 console.error("Error fetching highlights", error);
