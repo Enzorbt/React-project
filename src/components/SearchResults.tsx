@@ -51,7 +51,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ searchResults, objectMode
 
             fetchObjects();
         }
-    }, [searchResults, currentPage, itemsPerPage, objectModel, setFlashMessage]);
+    }, [searchResults, currentPage, itemsPerPage, objectModel, setFlashMessage, setLoading]);
 
     const handlePageChange = (pageNumber: number) => {
         setCurrentPage(pageNumber);
