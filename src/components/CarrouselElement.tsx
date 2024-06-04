@@ -8,10 +8,10 @@ interface HighlightProps {
 const CarrouselElement: React.FC<HighlightProps> = ({ object }) => {
     return (
         <div className="bg-white p-4 rounded-lg shadow-md h-96 flex flex-col justify-center items-center">
-            <img 
-                src={object.primaryImage} 
+            <img
+                src={object.primaryImage}
                 alt={object.title}
-                className="h-40 w-40 object-cover mb-4 rounded-full" />
+                className="h-40 w-40 object-cover mb-4 rounded-full"/>
             <div className="text-container max-h-16 overflow-hidden">
                 <h2 className="text-xl font-bold mb-2 text-center">
                     {object.title}
@@ -21,6 +21,7 @@ const CarrouselElement: React.FC<HighlightProps> = ({ object }) => {
                 </p>
             </div>
         </div>
+
     );
 };
 
