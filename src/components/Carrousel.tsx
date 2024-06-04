@@ -1,5 +1,5 @@
 ﻿import React, { useEffect, useState } from "react";
-import Highlight from "./Highlight";
+import CarrouselElement from "./CarrouselElement.tsx";
 import ObjectType from "../types/ObjectType";
 import SearchModel from "../models/SearchModel";
 import { useFlashes } from "../providers/FlashesProvider";
@@ -11,7 +11,7 @@ interface HighlightsProps {
     searchModel: SearchModel;
 }
 
-const Highlights: React.FC<HighlightsProps> = ({ searchModel }) => {
+const Carrousel: React.FC<HighlightsProps> = ({ searchModel }) => {
     const [highlights, setHighlights] = useState<ObjectType[]>([]);
     const { setFlashMessage } = useFlashes();
 
@@ -94,7 +94,7 @@ const Highlights: React.FC<HighlightsProps> = ({ searchModel }) => {
                 {highlights.slice(0, 20).map((highlight) => (
                     <div key={highlight.objectID} className="p-2 relative z-10">
                         <div className="transition transform hover:scale-105 hover:shadow-2xl hover:z-20">
-                            <Highlight highlight={highlight}/>
+                            <CarrouselElement highlight={highlight}/>
                         </div>
                     </div>
                 ))}
@@ -103,4 +103,4 @@ const Highlights: React.FC<HighlightsProps> = ({ searchModel }) => {
     );
 };
 
-export default Highlights;
+export default Carrousel;
