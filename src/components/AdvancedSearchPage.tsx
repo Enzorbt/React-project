@@ -6,6 +6,7 @@ import ObjectsType from "../types/ObjectsType.tsx";
 import AdvancedSearchBar from "./AdvancedSearchBar.tsx";
 import SearchResults from "./SearchResults.tsx";
 import ObjectModel from "../models/ObjectModel.tsx";
+import {useFlashes} from "../providers/FlashesProvider.tsx";
 
 interface AdvancedSearchPageProps {
     searchModel: SearchModel;
@@ -19,6 +20,7 @@ const AdvancedSearchPage: React.FC<AdvancedSearchPageProps> = ({
     searchModel: SearchModel, 
     objectModel: ObjectModel
 }) => {
+    const { setFlashMessage } = useFlashes();
     const [searchParams] = useSearchParams();
     const [searchResults, setSearchResults] = useState<ObjectsType>();
 
@@ -38,12 +40,19 @@ const AdvancedSearchPage: React.FC<AdvancedSearchPageProps> = ({
             dateEnd: searchParams.get('dateEnd') ? Number(searchParams.get('dateEnd')) : null,
         };
         
-        searchModel.searchObjects(searchParamsObj).then(setSearchResults);
-    }, [searchParams, searchModel]);
+        searchModel.searchObjects(searchParamsObj).then(
+            setSearchResults
+        ).catch((error) => {
+            setFlashMessage({
+                message: "No results found, " + error,
+                type: "error",
+            });
+        });
+    }, [searchParams, searchModel, setFlashMessage]);
 
     return (
         <>
-            <AdvancedSearchBar setSearchResults={setSearchResults}/>
+            <AdvancedSearchBar/>
             
             <SearchResults 
                 searchResults={searchResults}

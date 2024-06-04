@@ -14,29 +14,15 @@ class SearchModel {
         this.objectModel = objectModel;
     }
 
-    async getHighlights(): Promise<ObjectType[]> {
+    async getCarrouselItems(params: SearchParamsType, nb: number): Promise<ObjectType[]> {
         if (this.highlights.length === 0) {
-            const response = await this.searchObjects({ 
-                q: null,
-                isHighlight: true,
-                isOnView: null,
-                artistOrCulture: null,
-                hasImages: true,
-                title: null,
-                tags: null,
-                departmentId: null,
-                medium: null,
-                geoLocation: null,
-                dateBegin: null,
-                dateEnd: null,
-                
-            });
+            const response = await this.searchObjects(params);
             const objectIds = response.objectIDs.slice();
             for (let i = objectIds.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [objectIds[i], objectIds[j]] = [objectIds[j], objectIds[i]];
             }
-            for (let i = 0; i < 20; i++) {
+            for (let i = 0; i < nb; i++) {
                 this.highlights.push(await this.objectModel.getObject(objectIds[i]));
             }
         }
