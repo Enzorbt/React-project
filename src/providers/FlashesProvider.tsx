@@ -2,7 +2,7 @@
 
 interface FlashMessage {
     message: string;
-    type: 'success' | 'error' | 'warning';
+    type: 'success' | 'error' ;
 }
 
 interface FlashedContextType {
