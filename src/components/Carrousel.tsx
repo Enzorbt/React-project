@@ -1,33 +1,15 @@
-﻿import React, { useEffect, useState } from "react";
+﻿import React from "react";
 import CarrouselElement from "./CarrouselElement.tsx";
 import ObjectType from "../types/ObjectType";
-import SearchModel from "../models/SearchModel";
-import { useFlashes } from "../providers/FlashesProvider";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-interface HighlightsProps {
-    searchModel: SearchModel;
+interface CarrouselProps {
+    objects: ObjectType[];
 }
 
-const Carrousel: React.FC<HighlightsProps> = ({ searchModel }) => {
-    const [highlights, setHighlights] = useState<ObjectType[]>([]);
-    const { setFlashMessage } = useFlashes();
-
-    useEffect(() => {
-        searchModel
-            .getHighlights()
-            .then(setHighlights)
-            .catch((error) => {
-                console.error("Error fetching highlights", error);
-                setFlashMessage({
-                    message: "Error fetching highlights, " + error,
-                    type: "error",
-                });
-            });
-    }, [searchModel]);
-
+const Carrousel: React.FC<CarrouselProps> = ({ objects }) => {
     const SlickArrowLeft = ({ currentSlide, slideCount, ...props } : {currentSlide: number, slideCount: number}) => (
         <button
             {...props}
@@ -84,17 +66,17 @@ const Carrousel: React.FC<HighlightsProps> = ({ searchModel }) => {
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 3000,
-        prevArrow: <SlickArrowLeft currentSlide={0} slideCount={highlights.length} />,
-        nextArrow: <SlickArrowRight currentSlide={0} slideCount={highlights.length} />,
+        prevArrow: <SlickArrowLeft currentSlide={0} slideCount={objects.length} />,
+        nextArrow: <SlickArrowRight currentSlide={0} slideCount={objects.length} />,
     };
 
     return (
         <div className="relative mt-8 max-w-7xl mx-auto p-4 bg-gray-100 rounded-lg shadow-lg">
             <Slider {...settings}>
-                {highlights.slice(0, 20).map((highlight) => (
-                    <div key={highlight.objectID} className="p-2 relative z-10">
+                {objects.slice(0, 20).map((object) => (
+                    <div key={object.objectID} className="p-2 relative z-10">
                         <div className="transition transform hover:scale-105 hover:shadow-2xl hover:z-20">
-                            <CarrouselElement highlight={highlight}/>
+                            <CarrouselElement object={object}/>
                         </div>
                     </div>
                 ))}
