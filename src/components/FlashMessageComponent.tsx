@@ -1,6 +1,6 @@
 ﻿import { XMarkIcon, CheckCircleIcon, ExclamationTriangleIcon } from '@heroicons/react/24/solid'
-import {useFlashes} from "../providers/FlashesProvider.tsx";
-import {useEffect} from "react";
+import { useFlashes } from "../providers/FlashesProvider.tsx";
+import { useEffect } from "react";
 
 const FlashMessageComponent = () => {
     const { flashMessage, clearFlashMessage } = useFlashes();
@@ -21,14 +21,17 @@ const FlashMessageComponent = () => {
         }
     }, [flashMessage, clearFlashMessage]);
 
+    if (!flashMessage) return null;
+
     return (
-        <div>
-            {flashMessage && (
-                <div className={`flex flex-row items-center space-x-2 ${flashMessage.type === 'error' ? 'text-red-700 ' : flashMessage.type === 'success' ? 'text-green-700' : 'text-yellow-700'}`}>
-                    {flashMessage && getIcon(flashMessage.type)}
-                    <div>{flashMessage.message}</div>
-                </div>
-            )}
+        <div className="fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 z-50">
+            <div className={`max-w-md mx-auto flex items-center space-x-2 px-4 py-3 rounded-lg shadow-lg ${flashMessage.type === 'error' ? 'bg-red-100 border border-red-400 text-red-700' : flashMessage.type === 'success' ? 'bg-green-100 border border-green-400 text-green-700' : 'bg-yellow-100 border border-yellow-400 text-yellow-700'}`}>
+                {getIcon(flashMessage.type)}
+                <div>{flashMessage.message}</div>
+                <button onClick={clearFlashMessage} className="ml-auto">
+                    <XMarkIcon className="h-5 w-5" />
+                </button>
+            </div>
         </div>
     );
 };
