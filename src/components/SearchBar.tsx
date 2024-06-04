@@ -19,7 +19,7 @@ const SearchBar: React.FC = () => {
                         type="text"
                         value={query}
                         onChange={(event) => setQuery(event.target.value)}
-                        className="bg-transparent rounded-full px-4 py-2 w-full text-black"
+                        className="bg-transparent rounded-full px-4 py-2 w-full text-white"
                         placeholder="Search..."
                     />
                     <button
