@@ -47,52 +47,50 @@ class SearchModel {
 
     private buildQueryString(params: SearchParamsType): string {
         const queryParams: string[] = [];
-
-        if (!params.q) {
-            queryParams.push(`q=*`);
-        } else {
-            queryParams.push(`q=${encodeURIComponent(params.q)}`);
-        }
-
-        if (params.isHighlight) {
+        if (params.isHighlight !== null) {
             queryParams.push(`isHighlight=${params.isHighlight}`);
         }
 
-        if (params.title) {
+        if (params.title !== null) {
             queryParams.push(`title=${params.title}`);
         }
 
-        if (params.tags) {
+        if (params.tags !== null) {
             queryParams.push(`tags=${params.tags}`);
         }
 
-        if (params.departmentId) {
+        if (params.departmentId !== null) {
             queryParams.push(`departmentId=${params.departmentId}`);
         }
 
-        if (params.isOnView) {
+        if (params.isOnView !== null) {
             queryParams.push(`isOnView=${params.isOnView}`);
         }
 
-        if (params.artistOrCulture) {
+        if (params.artistOrCulture !== null) {
             queryParams.push(`artistOrCulture=${params.artistOrCulture}`);
         }
 
-        if (params.medium) {
+        if (params.medium !== null) {
             queryParams.push(`medium=${encodeURIComponent(params.medium)}`);
         }
 
-        if (params.hasImages) {
+        if (params.hasImages !== null) {
             queryParams.push(`hasImages=${params.hasImages}`);
         }
 
-        if (params.geoLocation) {
+        if (params.geoLocation !== null) {
             queryParams.push(`geoLocation=${encodeURIComponent(params.geoLocation)}`);
         }
 
-        if (params.dateBegin && params.dateEnd) {
+        if (params.dateBegin !== null && params.dateEnd !== null) {
             queryParams.push(`dateBegin=${params.dateBegin}`);
             queryParams.push(`dateEnd=${params.dateEnd}`);
+        }
+        if (params.q === null) {
+            queryParams.push(`q=*`);
+        } else {
+            queryParams.push(`q=${encodeURIComponent(params.q)}`);
         }
 
         return queryParams.length > 0 ? '?' + queryParams.join('&') : '';
