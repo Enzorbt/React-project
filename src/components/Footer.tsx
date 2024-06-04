@@ -11,8 +11,10 @@ const Footer: React.FC<FooterProps> = () => {
                     <img src="/MMIcon.png" alt="The Met Logo" className="w-10 h-10 md:w-16 md:h-16 ml-4"/>
                 </div>
             </div>
-            <div className="md:text-left md:mt-4">Website developed by SupKnowledge.</div>
-            <div className="md:text-left md:mt-4">&copy; 2024 The Met. All Rights Reserved.</div>
+            <div className="container mx-auto flex justify-center mt-4">
+                <div className="md:text md:mt-4  p-2">Website developed by SupKnowledge.</div>
+                <div className="md:text md:mt-4 border-l-2  p-2">&copy; 2024 The Met. All Rights Reserved.</div>
+            </div>
             <div className="container mx-auto flex justify-end mt-4">
                 <div className="flex items-center space-x-4">
                     <img src="/X.png" alt="Twitter" className="w-8 h-8"/>
