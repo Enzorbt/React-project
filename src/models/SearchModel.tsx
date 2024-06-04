@@ -31,6 +31,7 @@ class SearchModel {
 
     async searchObjects(params: SearchParamsType): Promise<ObjectsType> {
         const queryString = this.buildQueryString(params);
+        // console.log(queryString)
         try {
             const response = await fetch(`${this.baseURL}/search${queryString}`);
             if (!response.ok) {
