@@ -10,20 +10,21 @@ interface CarrouselProps {
 }
 
 const Carrousel: React.FC<CarrouselProps> = ({ objects }) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const SlickArrowLeft = ({ currentSlide, slideCount, ...props } : {currentSlide: number, slideCount: number}) => (
         <button
             {...props}
             className={
                 "slick-prev slick-arrow" +
                 (currentSlide === 0 ? " slick-disabled" : "") +
-                " w-12 h-12 flex items-center justify-center bg-gray-800 text-white rounded-full transition duration-150 ease-in-out hover:bg-gray-600"
+                " w-12 h-6 flex items-center justify-center bg-gray-800 text-white rounded-full transition duration-150 ease-in-out hover:bg-gray-600"
             }
             aria-hidden="true"
             aria-disabled={currentSlide === 0}
             type="button"
         >
             <svg aria-hidden="true"
-                 className="w-8 h-8"
+                 className="w-8 h-4"
                  fill="currentColor"
                  viewBox="0 0 24 24">
                 <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z">
@@ -42,13 +43,13 @@ const Carrousel: React.FC<CarrouselProps> = ({ objects }) => {
             className={
                 "slick-next slick-arrow" +
                 (currentSlide === slideCount - 1 ? " slick-disabled" : "") +
-                " w-12 h-12 flex items-center justify-center bg-gray-800 text-white rounded-full transition duration-150 ease-in-out hover:bg-gray-600"
+                " w-12 h-6 flex items-center justify-center bg-blue-800 text-white rounded-full transition duration-150 ease-in-out hover:bg-blue-600"
             }
             aria-hidden="true"
             aria-disabled={currentSlide === slideCount - 1}
             type="button">
             <svg aria-hidden="true"
-                 className="w-8 h-8"
+                 className="w-8 h-4"
                  fill="currentColor"
                  viewBox="0 0 24 24">
                 <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z">
@@ -71,7 +72,7 @@ const Carrousel: React.FC<CarrouselProps> = ({ objects }) => {
     };
 
     return (
-        <div className="relative mt-8 max-w-7xl mx-auto p-4 bg-gray-100 rounded-lg shadow-lg">
+        <div className="relative mt-8 max-w-7xl mx-auto p-4 bg-gray-900 rounded-lg shadow-red-950-lg">
             <Slider {...settings}>
                 {objects.slice(0, 20).map((object) => (
                     <div key={object.objectID} className="p-2 relative z-10">

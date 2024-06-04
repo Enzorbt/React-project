@@ -13,6 +13,7 @@ interface FlashedContextType {
 
 const FlashedContext = createContext<FlashedContextType | undefined>(undefined);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useFlashes = () => {
     const context = useContext(FlashedContext);
     if (!context) {
