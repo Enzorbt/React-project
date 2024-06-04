@@ -11,19 +11,18 @@ const SearchBar: React.FC = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="flex items-center">
+        <form onSubmit={handleSubmit} className="flex items-center mt-5">
             <input
                 type="text"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                className="border border-gray-300 rounded-l-md px-4 py-2 w-full"
+                className="border border-gray-500 bg-transparent rounded-full px-4 py-2 w-full text-black"
                 placeholder="Search..."
             />
             <button
                 type="submit"
-                className="bg-blue-500 text-white rounded-r-md px-4 py-2"
-            >
-                Search
+                className="bg-transparent text-gray-500 opacity-70 rounded-full p-2 flex items-center justify-center"
+            >Search
             </button>
         </form>
     );
