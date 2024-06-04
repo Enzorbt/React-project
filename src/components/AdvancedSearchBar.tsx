@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import SearchParamsType from '../types/SearchParamsType';
 import DepartmentModel from "../models/DepartmentModel.tsx";
 import DepartmentType from "../types/DepartmentType.tsx";
+import {useFlashes} from "../providers/FlashesProvider.tsx";
 
 interface AdvancedSearchBarProps {
     departmentModel: DepartmentModel;
@@ -27,14 +28,19 @@ const AdvancedSearchBar: React.FC<AdvancedSearchBarProps> = ({ departmentModel }
 
     const [departments, setDepartments] = useState<DepartmentType[]>([]);
     const [useDates, setUseDates] = useState(false);
+    const { setFlashMessage } = useFlashes();
+    
 
     useEffect(() => {
         departmentModel.getDepartments().then(
             setDepartments
-        ).catch(
-            // Handle error
-        );
-    }, [departmentModel]);
+        ).catch((error) =>{
+            setFlashMessage({
+                message: "Error fetching highlights, " + error,
+                type: "error",
+            });
+        });
+    }, [departmentModel, setFlashMessage]);
 
     const setQ = (q: string) => {
         setSearchParams({ ...searchParams, q });

@@ -39,7 +39,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                                 searchModel={searchModel}
                                 departmentModel={departmentModel}
                         />} />
-                        <Route path="objects/:objectId" element={<ObjectPage/>} />
+                        <Route path="objects/:objectId" element={<ObjectPage
+                            objectModel={objectModel}
+                        />} />
                     </Route>
                 </Routes>
             </FlashesProvider>
