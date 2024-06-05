@@ -22,7 +22,6 @@ class DepartmentModel {
             this.departments = departments.departments;
             return this.departments;
         } catch (error) {
-            console.error(`Error fetching departments: ${error}`);
             throw error;
         }
     }
