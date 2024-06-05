@@ -89,11 +89,11 @@ const SearchResults: React.FC<SearchResultsProps> = ({ searchResults, objectMode
                 <SearchResult key={object.objectID} object={object} />
             ))}
             <div className="flex justify-center mt-4">
-                <button className={`mx-1 px-3 py-1 rounded-full ${currentPage === 1 ? 'bg-gray-200 cursor-not-allowed' : 'bg-blue-500 text-white'}`} onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
+                <button className={`mx-1 px-3 py-1 rounded-full ${currentPage === 1 ? 'bg-red-500 cursor-not-allowed' : 'bg-red-950 text-white'}`} onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
                 {pageNumbers.map((pageNumber) => (
-                    <button key={pageNumber} className={`mx-1 px-3 py-1 rounded-full ${pageNumber === currentPage ? 'bg-blue-500 text-white' : 'bg-gray-200'}`} onClick={() => handlePageChange(pageNumber)}>{pageNumber}</button>
+                    <button key={pageNumber} className={`mx-1 px-3 py-1 rounded-full ${pageNumber === currentPage ? 'bg-red-950 text-white' : 'bg-red-500'}`} onClick={() => handlePageChange(pageNumber)}>{pageNumber}</button>
                 ))}
-                <button className={`mx-1 px-3 py-1 rounded-full ${currentPage === totalPages ? 'bg-gray-200 cursor-not-allowed' : 'bg-blue-500 text-white'}`} onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>Next</button>
+                <button className={`mx-1 px-3 py-1 rounded-full ${currentPage === totalPages ? 'bg-red-950 cursor-not-allowed' : 'bg-red-500 text-white'}`} onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>Next</button>
             </div>
         </>
     );

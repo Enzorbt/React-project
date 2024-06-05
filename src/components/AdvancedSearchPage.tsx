@@ -74,7 +74,7 @@ const AdvancedSearchPage: React.FC<AdvancedSearchPageProps> = ({
     }, [currentPage, setSearchParams]);
 
     return (
-        <div className="min-h-screen bg-gray-900 text-white p-6">
+        <div className="min-h-screen bg-black text-white p-6">
             <link rel="icon" type="image/svg+xml" href="/MMIcon.png"/>
             <div className="max-w-6xl mx-auto">
                 <AdvancedSearchBar departmentModel={departmentModel}/>
