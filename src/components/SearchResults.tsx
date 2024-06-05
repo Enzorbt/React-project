@@ -58,7 +58,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ searchResults, objectMode
     };
 
     if (searchResults === undefined && !loading) {
-        return null; // No search has been launched
+        return null;
     }
 
     if (loading) {
@@ -68,11 +68,11 @@ const SearchResults: React.FC<SearchResultsProps> = ({ searchResults, objectMode
     }
 
     if (searchResults !== undefined && searchResults.total === 0) {
-        return (
-            <div className="text-red-600">
-                No results
-            </div>
-        );
+        setFlashMessage({
+            message: "No result found !",
+            type: "error",
+        });
+        return null;
     }
 
     const totalPages = Math.ceil((searchResults?.objectIDs?.length ?? 0) / itemsPerPage);
