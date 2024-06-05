@@ -16,7 +16,7 @@ interface SearchResultsProps {
 }
 
 const SearchResults: React.FC<SearchResultsProps> = ({ searchResults, objectModel, currentPage, setCurrentPage, loading, setLoading }) => {
-    const [itemsPerPage] = useState(10);
+    const [itemsPerPage] = useState(12); // Adjusted to 12 for 3 columns x 4 rows
     const [objects, setObjects] = useState<ObjectType[]>([]);
     const { setFlashMessage } = useFlashes();
 
@@ -31,12 +31,11 @@ const SearchResults: React.FC<SearchResultsProps> = ({ searchResults, objectMode
                 Promise.all(objectIDs.map(objectID =>
                     objectModel.getObject(objectID)
                         .then(object => object)
-                        .catch(err => {
+                        .catch((err) => {
                             setFlashMessage({
                                 message: "Failed to fetch objects, " + err,
                                 type: "error",
                             });
-                            return null;
                         })
                 )).then(fetchedObjects => {
                     setObjects(fetchedObjects.filter((obj): obj is ObjectType => obj !== null && obj !== undefined));
@@ -64,7 +63,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ searchResults, objectMode
 
     if (loading) {
         return (
-            <LoadingComponent/>
+            <LoadingComponent />
         );
     }
 
@@ -85,9 +84,13 @@ const SearchResults: React.FC<SearchResultsProps> = ({ searchResults, objectMode
 
     return (
         <>
-            {objects.map((object) => (
-                <SearchResult key={object.objectID} object={object} />
-            ))}
+            <div className="flex flex-wrap -mx-2">
+                {objects.map((object) => (
+                    <div key={object.objectID} className="w-full md:w-1/3 lg:w-1/4 p-2">
+                        <SearchResult object={object} />
+                    </div>
+                ))}
+            </div>
             <div className="flex justify-center mt-4">
                 <button className={`mx-1 px-3 py-1 rounded-full ${currentPage === 1 ? 'bg-red-500 cursor-not-allowed' : 'bg-red-950 text-white'}`} onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
                 {pageNumbers.map((pageNumber) => (

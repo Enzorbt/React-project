@@ -47,18 +47,11 @@ const ObjectPage: React.FC<ObjectPageProps> = ({ objectModel }) => {
 
     return (
         <div className="min-h-screen bg-gray-900 text-white">
-            <link 
-                rel="icon" 
+            <link
+                rel="icon"
                 type="image/png"
-                  href={objectData?.primaryImageSmall}/>
+                href={objectData?.primaryImageSmall}/>
             <div className="max-w-4xl mx-auto p-6">
-                <button
-                    onClick={goBackOrHome}
-                    className="mb-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded"
-                >
-                    Go Back
-                </button>
-
                 {objectData && (
                     <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
                         <h1 className="text-4xl font-bold mb-6 text-center">{objectData.title}</h1>
@@ -103,6 +96,12 @@ const ObjectPage: React.FC<ObjectPageProps> = ({ objectModel }) => {
                     </div>
                 )}
             </div>
+            <button
+                onClick={goBackOrHome}
+                className="mb-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded justify-items-start"
+            >
+                Go Back
+            </button>
         </div>
     );
 };
