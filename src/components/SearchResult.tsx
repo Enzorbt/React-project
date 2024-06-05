@@ -10,7 +10,7 @@ const SearchResult: React.FC<SearchResultProps> = ({ object }) => {
     return (
         <>
             <Link to={`/objects/${object.objectID}`}>
-                <div className="flex items-center mb-4 bg-gray-800 h-32">
+                <div className="flex items-center mb-4 bg-gray-800 h-52">
                     <img 
                         src={object.primaryImageSmall} 
                         alt={object.title} 

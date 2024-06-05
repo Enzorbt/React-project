@@ -101,7 +101,7 @@ const HomePage: React.FC<HomePageProps> = ({ searchModel }) => {
             <link rel="icon" type="image/svg+xml" href="/MMIcon.png"/>
             <MetPresentations/>
             <div className="flex justify-center items-center">
-                <hr className="w-80 white my-4"/>
+                <hr className=" w-80 white m-6"/>
             </div>
             {/*Highlights carrousel*/}
             <div
