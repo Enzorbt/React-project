@@ -35,7 +35,6 @@ const HomePage: React.FC<HomePageProps> = ({ searchModel }) => {
             )
             .then(setHighlights)
             .catch((error) => {
-                console.error("Error fetching highlights", error);
                 setFlashMessage({
                     message: "Error fetching highlights, " + error,
                     type: "error",

@@ -51,7 +51,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ searchResults, objectMode
 
             fetchObjects();
         }
-    }, [searchResults, currentPage, itemsPerPage, objectModel, setFlashMessage]);
+    }, [searchResults, currentPage, itemsPerPage, objectModel, setFlashMessage, setLoading]);
 
     const handlePageChange = (pageNumber: number) => {
         setCurrentPage(pageNumber);
@@ -63,8 +63,13 @@ const SearchResults: React.FC<SearchResultsProps> = ({ searchResults, objectMode
 
     if (loading) {
         return (
-            <div className="text-white">
-                Loading...
+            <div className="flex justify-center items-center space-x-2 pt-4 pb-4">
+                <div
+                    className="spinner-dot animate-bounce bg-white w-2 h-2 rounded-full"></div>
+                <div
+                    className="spinner-dot animate-bounce200 bg-white w-2 h-2 rounded-full"></div>
+                <div
+                    className="spinner-dot animate-bounce400 bg-white w-2 h-2 rounded-full"></div>
             </div>
         );
     }
