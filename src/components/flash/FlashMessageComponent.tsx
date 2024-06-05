@@ -1,5 +1,5 @@
 ﻿import { XMarkIcon, CheckCircleIcon, ExclamationTriangleIcon } from '@heroicons/react/24/solid'
-import { useFlashes } from "../providers/FlashesProvider.tsx";
+import { useFlashes } from "../../providers/FlashesProvider.tsx";
 import { useEffect } from "react";
 
 const FlashMessageComponent = () => {

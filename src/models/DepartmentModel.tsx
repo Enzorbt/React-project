@@ -13,17 +13,13 @@ class DepartmentModel {
         if (this.departments.length > 0) {
             return this.departments;
         }
-        try {
-            const response = await fetch(`${this.baseURL}/departments`);
-            if (!response.ok) {
-                throw new Error('Failed to fetch departments');
-            }
-            const departments = await response.json();
-            this.departments = departments.departments;
-            return this.departments;
-        } catch (error) {
-            throw error;
+        const response = await fetch(`${this.baseURL}/departments`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch departments');
         }
+        const departments = await response.json();
+        this.departments = departments.departments;
+        return this.departments;
     }
 
     getDepartmentNameById(id: number): string | undefined {

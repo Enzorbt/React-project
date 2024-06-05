@@ -1,6 +1,6 @@
 ﻿import React from "react";
 import CarrouselElement from "./CarrouselElement.tsx";
-import ObjectType from "../types/ObjectType";
+import ObjectType from "../../types/ObjectType.tsx";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

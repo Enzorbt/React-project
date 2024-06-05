@@ -1,13 +1,13 @@
 ﻿import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import SearchModel from '../models/SearchModel';
-import SearchParamsType from '../types/SearchParamsType';
-import ObjectsType from "../types/ObjectsType.tsx";
+import SearchModel from '../../models/SearchModel.tsx';
+import SearchParamsType from '../../types/SearchParamsType.tsx';
+import ObjectsType from "../../types/ObjectsType.tsx";
 import AdvancedSearchBar from "./AdvancedSearchBar.tsx";
 import SearchResults from "./SearchResults.tsx";
-import ObjectModel from "../models/ObjectModel.tsx";
-import { useFlashes } from "../providers/FlashesProvider.tsx";
-import DepartmentModel from "../models/DepartmentModel.tsx";
+import ObjectModel from "../../models/ObjectModel.tsx";
+import { useFlashes } from "../../providers/FlashesProvider.tsx";
+import DepartmentModel from "../../models/DepartmentModel.tsx";
 
 interface AdvancedSearchPageProps {
     searchModel: SearchModel;

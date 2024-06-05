@@ -1,9 +1,9 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import ObjectModel from '../models/ObjectModel';
-import ObjectType from '../types/ObjectType';
-import { useFlashes } from "../providers/FlashesProvider.tsx";
-import LoadingComponent from "./LoadingComponent.tsx";
+import ObjectModel from '../../models/ObjectModel.tsx';
+import ObjectType from '../../types/ObjectType.tsx';
+import { useFlashes } from "../../providers/FlashesProvider.tsx";
+import LoadingComponent from "../loading/LoadingComponent.tsx";
 
 interface ObjectPageProps {
     objectModel: ObjectModel;
