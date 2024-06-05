@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import ObjectModel from '../models/ObjectModel';
 import ObjectType from '../types/ObjectType';
 import { useFlashes } from "../providers/FlashesProvider.tsx";
+import LoadingComponent from "./LoadingComponent.tsx";
 
 interface ObjectPageProps {
     objectModel: ObjectModel;
@@ -40,10 +41,16 @@ const ObjectPage: React.FC<ObjectPageProps> = ({ objectModel }) => {
         fetchObject();
     }, [objectId, objectModel, setFlashMessage]);
 
-    if (loading) return <div className="flex justify-center items-center h-screen text-white">Loading...</div>;
+    if (loading) return (
+        <LoadingComponent/>
+    );
 
     return (
         <div className="min-h-screen bg-gray-900 text-white">
+            <link 
+                rel="icon" 
+                type="image/png"
+                  href={objectData?.primaryImageSmall}/>
             <div className="max-w-4xl mx-auto p-6">
                 <button
                     onClick={goBackOrHome}
@@ -62,13 +69,24 @@ const ObjectPage: React.FC<ObjectPageProps> = ({ objectModel }) => {
                                 className="md:w-1/2 w-full max-w-lg mx-auto mb-6 md:mb-0 rounded-lg shadow-lg"
                             />
                             <div className="md:ml-6 space-y-4">
-                                <p><strong>Artist:</strong> {objectData.artistDisplayName}</p>
-                                <p><strong>Culture:</strong> {objectData.culture}</p>
-                                <p><strong>Period:</strong> {objectData.period}</p>
-                                <p><strong>Dimensions:</strong> {objectData.dimensions}</p>
-                                <p><strong>Medium:</strong> {objectData.medium}</p>
-                                <p><strong>Credit Line:</strong> {objectData.creditLine}</p>
-                                <p><strong>Repository:</strong> {objectData.repository}</p>
+                                <p>
+                                    <strong>Artist:</strong> {objectData.artistDisplayName}
+                                </p>
+                                <p>
+                                    <strong>Culture:</strong> {objectData.culture}
+                                </p>
+                                <p><strong>Period:</strong> {objectData.period}
+                                </p>
+                                <p>
+                                    <strong>Dimensions:</strong> {objectData.dimensions}
+                                </p>
+                                <p><strong>Medium:</strong> {objectData.medium}
+                                </p>
+                                <p><strong>Credit
+                                    Line:</strong> {objectData.creditLine}</p>
+                                <p>
+                                    <strong>Repository:</strong> {objectData.repository}
+                                </p>
                                 <p>
                                     <strong>Object URL:</strong>
                                     <a
