@@ -23,17 +23,18 @@ This project uses the MET (Metropolitan Museum of Art) API to fetch collection d
 
 ## Project Structure
 The project is structured as follows:
-
-met-artifacts-interface/
-├── public/
-├── src/
-│   ├── components/
-│   ├── providers/
-│   ├── models/
-│   ├── assets/
-│   └── types/
-├── package.json
-└── README.md
+  
+  met-artifacts-interface/
+  ├── public/
+  ├── src/
+  │   ├── components/
+  │   ├── providers/
+  │   ├── models/
+  │   ├── assets/
+  │   └── types/
+  ├── package.json
+  └── README.md
+  
 
 ## Figma Screenshot
 ![Figma Screenshot](./public/figma.png)
