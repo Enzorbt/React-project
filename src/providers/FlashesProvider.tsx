@@ -1,15 +1,6 @@
 ﻿import React, { createContext, useContext, useEffect, useState } from 'react';
-
-interface FlashMessage {
-    message: string;
-    type: 'success' | 'error' ;
-}
-
-interface FlashedContextType {
-    flashMessage: FlashMessage | null;
-    setFlashMessage: React.Dispatch<React.SetStateAction<FlashMessage | null>>;
-    clearFlashMessage: () => void;
-}
+import FlashMessageType from "../types/FlashMessageType.tsx";
+import FlashedContextType from "../types/FlashedContextType.tsx";
 
 const FlashedContext = createContext<FlashedContextType | undefined>(undefined);
 
@@ -27,7 +18,7 @@ interface FlashedProviderProps {
 }
 
 const FlashesProvider: React.FC<FlashedProviderProps> = ({ children }) => {
-    const [flashMessage, setFlashMessage] = useState<FlashMessage | null>(() => {
+    const [flashMessage, setFlashMessage] = useState<FlashMessageType | null>(() => {
         const storedFlashMessage = localStorage.getItem('flashMessage');
         return storedFlashMessage ? JSON.parse(storedFlashMessage) : null;
     });
