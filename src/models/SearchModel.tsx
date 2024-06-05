@@ -31,7 +31,6 @@ class SearchModel {
 
     async searchObjects(params: SearchParamsType): Promise<ObjectsType> {
         const queryString = this.buildQueryString(params);
-        // console.log(queryString)
         try {
             const response = await fetch(`${this.baseURL}/search${queryString}`);
             if (!response.ok) {
@@ -40,7 +39,7 @@ class SearchModel {
             const searchResult = await response.json();
             return searchResult;
         } catch (error) {
-            throw new Error(`Error searching objects with query ${queryString}:` + error);
+            throw new Error(`Error searching objects with query ${queryString}: ` + error);
         }
     }
 

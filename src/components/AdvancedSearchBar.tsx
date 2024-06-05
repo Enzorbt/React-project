@@ -205,7 +205,7 @@ const AdvancedSearchBar: React.FC<AdvancedSearchBarProps> = ({ departmentModel }
                             <span className="ml-2 text-white">Has Images</span>
                         </label>
                     </div>
-                    <div className="flex justify-between mb-4">
+                    <div className="flex justify-between mb-4 flex-wrap">
                         <div className="flex flex-col">
                             <label className="text-white mb-2">Department</label>
                             <select
@@ -243,7 +243,7 @@ const AdvancedSearchBar: React.FC<AdvancedSearchBarProps> = ({ departmentModel }
                             />
                         </div>
                     </div>
-                    <div className="flex justify-between mb-4">
+                    <div className="flex justify-between mb-4 flex-wrap">
                         <div className="flex flex-col">
                             <label className="text-white mb-2">Start Date</label>
                             <input
