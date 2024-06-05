@@ -13,19 +13,19 @@ const SearchBar: React.FC = () => {
 
     return (
         <>
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center py-8 bg-black">
                 <form onSubmit={handleSubmit}
-                      className="flex items-center mt-5 border border-gray-500 bg-transparent rounded-full w-4/5">
+                      className="flex items-center w-full max-w-4xl border border-gray-500 bg-gray-800 rounded-full">
                     <input
                         type="text"
                         value={query}
                         onChange={(event) => setQuery(event.target.value)}
-                        className="bg-transparent rounded-full px-4 py-2 w-full text-white"
+                        className="bg-transparent rounded-full px-4 py-2 w-full text-white placeholder-gray-400 focus:outline-none"
                         placeholder="Search..."
                     />
                     <button
                         type="submit"
-                        className="bg-transparent text-gray-500 opacity-70 rounded-full p-2 flex items-center justify-center border-2"
+                        className="bg-blue-600 text-white rounded-full px-4 py-2 ml-2 hover:bg-blue-700 transition duration-300"
                     >Search
                     </button>
                 </form>

@@ -6,7 +6,7 @@ import ObjectsType from "../types/ObjectsType.tsx";
 import AdvancedSearchBar from "./AdvancedSearchBar.tsx";
 import SearchResults from "./SearchResults.tsx";
 import ObjectModel from "../models/ObjectModel.tsx";
-import {useFlashes} from "../providers/FlashesProvider.tsx";
+import { useFlashes } from "../providers/FlashesProvider.tsx";
 import DepartmentModel from "../models/DepartmentModel.tsx";
 
 interface AdvancedSearchPageProps {
@@ -16,10 +16,10 @@ interface AdvancedSearchPageProps {
 }
 
 const AdvancedSearchPage: React.FC<AdvancedSearchPageProps> = ({
-                                                                   searchModel, 
+                                                                   searchModel,
                                                                    objectModel,
                                                                    departmentModel
-}) => {
+                                                               }) => {
     const { setFlashMessage } = useFlashes();
     const [searchParams, setSearchParams] = useSearchParams();
     const [searchResults, setSearchResults] = useState<ObjectsType>();
@@ -52,9 +52,9 @@ const AdvancedSearchPage: React.FC<AdvancedSearchPageProps> = ({
         if (areAllParamsNull(searchParamsObj)) {
             setSearchResults(undefined);
             setLoading(false);
-            return; // All parameters are null, return early
+            return;
         }
-        
+
         searchModel.searchObjects(searchParamsObj).then(
             setSearchResults
         ).catch((error) => {
@@ -74,18 +74,26 @@ const AdvancedSearchPage: React.FC<AdvancedSearchPageProps> = ({
     }, [currentPage, setSearchParams]);
 
     return (
-        <>
-            <AdvancedSearchBar departmentModel={departmentModel}/>
-            
-            <SearchResults
-                searchResults={searchResults}
-                objectModel={objectModel}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                loading={loading}
-                setLoading={setLoading}
-            />
-        </>
+        <div className="min-h-screen bg-gray-900 text-white p-6">
+            <div className="max-w-6xl mx-auto">
+                <AdvancedSearchBar departmentModel={departmentModel} />
+
+                {loading ? (
+                    <div className="flex justify-center items-center h-64">
+                        <div className="loader">Loading...</div>
+                    </div>
+                ) : (
+                    <SearchResults
+                        searchResults={searchResults}
+                        objectModel={objectModel}
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                        loading={loading}
+                        setLoading={setLoading}
+                    />
+                )}
+            </div>
+        </div>
     );
 };
 

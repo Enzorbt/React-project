@@ -46,7 +46,7 @@ const HomePage: React.FC<HomePageProps> = ({ searchModel }) => {
         <>
             <MetPresentations/>
             <div className="flex justify-center items-center">
-                <hr className=" w-60 white size-6"/>
+                <hr className=" w-80 white size-6"/>
             </div>
             {/*Highlights carrousel*/}
             <div className="text-white text-2xl font-extrabold justify-items-start">
