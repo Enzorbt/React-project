@@ -11,7 +11,6 @@ class ObjectModel {
     async getObject(objectID: number): Promise<ObjectType> {
         const cachedObject = this.objects.find((obj) => obj.objectID === objectID);
         if (cachedObject) {
-            console.log("used cashed object (id:" + cachedObject.objectID + ")");
             return cachedObject;
         }
         

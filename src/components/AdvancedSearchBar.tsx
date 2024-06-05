@@ -59,6 +59,7 @@ const AdvancedSearchBar: React.FC<AdvancedSearchBarProps> = ({ departmentModel }
     };
 
     const setDepartmentId = (departmentId: number | null) => {
+        departmentId = departmentId !== 0 ? departmentId : null;
         setSearchParamsObj({ ...searchParamsObj, departmentId });
     };
 

@@ -6,27 +6,24 @@ import SearchParamsType from "../types/SearchParamsType.tsx";
 class SearchModel {
     private readonly baseURL: string;
     private readonly objectModel: ObjectModel;
-    private readonly highlights: ObjectType[];
     
     constructor(baseURL: string, objectModel: ObjectModel) {
         this.baseURL = baseURL;
-        this.highlights = [];
         this.objectModel = objectModel;
     }
 
     async getCarrouselItems(params: SearchParamsType, nb: number): Promise<ObjectType[]> {
-        if (this.highlights.length === 0) {
-            const response = await this.searchObjects(params);
-            const objectIds = response.objectIDs.slice();
-            for (let i = objectIds.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [objectIds[i], objectIds[j]] = [objectIds[j], objectIds[i]];
-            }
-            for (let i = 0; i < nb; i++) {
-                this.highlights.push(await this.objectModel.getObject(objectIds[i]));
-            }
+        const response = await this.searchObjects(params);
+        const objectIds = response.objectIDs.slice();
+        for (let i = objectIds.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [objectIds[i], objectIds[j]] = [objectIds[j], objectIds[i]];
         }
-        return this.highlights;
+        const items = [];
+        for (let i = 0; i < nb; i++) {
+            items.push(await this.objectModel.getObject(objectIds[i]));
+        }
+        return items;
     }
 
     async searchObjects(params: SearchParamsType): Promise<ObjectsType> {
