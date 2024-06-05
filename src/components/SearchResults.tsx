@@ -16,7 +16,7 @@ interface SearchResultsProps {
 }
 
 const SearchResults: React.FC<SearchResultsProps> = ({ searchResults, objectModel, currentPage, setCurrentPage, loading, setLoading }) => {
-    const [itemsPerPage] = useState(12); // Adjusted to 12 for 3 columns x 4 rows
+    const [itemsPerPage] = useState(12);
     const [objects, setObjects] = useState<ObjectType[]>([]);
     const { setFlashMessage } = useFlashes();
 
@@ -86,7 +86,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ searchResults, objectMode
         <>
             <div className="flex flex-wrap -mx-2">
                 {objects.map((object) => (
-                    <div key={object.objectID} className="w-full md:w-1/3 lg:w-1/4 p-2">
+                    <div key={object.objectID} className="w-full md:w-1/4 lg:w-1/3 p-2">
                         <SearchResult object={object} />
                     </div>
                 ))}
