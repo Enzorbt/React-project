@@ -1,9 +1,9 @@
 ﻿import React, { useState, useEffect } from 'react';
-import {useNavigate, useSearchParams} from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import SearchParamsType from '../types/SearchParamsType';
 import DepartmentModel from "../models/DepartmentModel.tsx";
 import DepartmentType from "../types/DepartmentType.tsx";
-import {useFlashes} from "../providers/FlashesProvider.tsx";
+import { useFlashes } from "../providers/FlashesProvider.tsx";
 
 interface AdvancedSearchBarProps {
     departmentModel: DepartmentModel;
@@ -30,12 +30,11 @@ const AdvancedSearchBar: React.FC<AdvancedSearchBarProps> = ({ departmentModel }
     const [departments, setDepartments] = useState<DepartmentType[]>([]);
     const [useDates, setUseDates] = useState(false);
     const { setFlashMessage } = useFlashes();
-    
 
     useEffect(() => {
         departmentModel.getDepartments().then(
             setDepartments
-        ).catch((error) =>{
+        ).catch((error) => {
             setFlashMessage({
                 message: "Error fetching highlights, " + error,
                 type: "error",
@@ -108,176 +107,157 @@ const AdvancedSearchBar: React.FC<AdvancedSearchBarProps> = ({ departmentModel }
     };
 
     return (
-        <div className="flex items-center justify-center">
-            <form onSubmit={handleSearch}
-                  className="flex flex-col justify-center items-center w-full">
-                <div className="flex justify-center items-center mt-5 border border-gray-500 bg-transparent rounded-full w-4/5">
+        <div className="flex items-center justify-center py-8 bg-gray-900">
+            <form onSubmit={handleSearch} className="w-full max-w-4xl">
+                <div className="flex items-center mb-4">
                     <input
                         type="text"
                         name="q"
                         value={searchParamsObj.q ?? ''}
                         onChange={(event) => setQ(event.target.value)}
-                        className="bg-transparent rounded-full px-4 py-2 w-full text-white"
+                        className="flex-grow bg-gray-800 text-white placeholder-gray-400 rounded-full px-4 py-2 mr-4 focus:outline-none"
                         placeholder="Search..."
                     />
                     <button
                         type="submit"
-                        className="bg-transparent text-gray-500 opacity-70 rounded-full p-2 flex items-center justify-center border-2"
-                    >Search
+                        className="bg-blue-600 text-white rounded-full px-4 py-2 hover:bg-blue-700 transition duration-300"
+                    >
+                        Search
                     </button>
                 </div>
-                <div className="flex flex-col justify-center items-center">
-                    <div className="flex flex-wrap justify-center my-4">
-                        <label className="mr-4 flex items-center">
+                <div className="bg-gray-800 p-4 rounded-lg">
+                    <div className="flex flex-wrap justify-between mb-4">
+                        <label className="flex items-center mr-4">
                             <input
                                 type="checkbox"
                                 name="isHighlight"
                                 checked={searchParamsObj.isHighlight ?? undefined}
                                 onChange={(event) => setIsHighlight(event.target.checked)}
-                                className="form-checkbox h-5 w-5 text-indigo-600"
+                                className="form-checkbox h-5 w-5 text-blue-600"
                             />
                             <span className="ml-2 text-white">Highlight</span>
                         </label>
-                        <label className="mr-4 flex items-center">
+                        <label className="flex items-center mr-4">
                             <input
                                 type="checkbox"
                                 name="title"
                                 checked={searchParamsObj.title ?? undefined}
                                 onChange={(event) => setTitle(event.target.checked)}
-                                className="form-checkbox h-5 w-5 text-indigo-600"
+                                className="form-checkbox h-5 w-5 text-blue-600"
                             />
                             <span className="ml-2 text-white">Title</span>
                         </label>
-                        <label className="mr-4 flex items-center">
+                        <label className="flex items-center mr-4">
                             <input
                                 type="checkbox"
                                 name="tags"
                                 checked={searchParamsObj.tags ?? undefined}
                                 onChange={(event) => setTags(event.target.checked)}
-                                className="form-checkbox h-5 w-5 text-indigo-600"
+                                className="form-checkbox h-5 w-5 text-blue-600"
                             />
                             <span className="ml-2 text-white">Tags</span>
                         </label>
-                        <label className="mr-4 flex items-center">
+                        <label className="flex items-center mr-4">
                             <input
                                 type="checkbox"
                                 name="isOnView"
                                 checked={searchParamsObj.isOnView ?? undefined}
                                 onChange={(event) => setIsOnView(event.target.checked)}
-                                className="form-checkbox h-5 w-5 text-indigo-600"
+                                className="form-checkbox h-5 w-5 text-blue-600"
                             />
                             <span className="ml-2 text-white">Is On View</span>
                         </label>
-                        <label className="mr-4 flex items-center">
+                        <label className="flex items-center mr-4">
                             <input
                                 type="checkbox"
                                 name="artistOrCulture"
                                 checked={searchParamsObj.artistOrCulture ?? undefined}
                                 onChange={(event) => setArtistOrCulture(event.target.checked)}
-                                className="form-checkbox h-5 w-5 text-indigo-600"
+                                className="form-checkbox h-5 w-5 text-blue-600"
                             />
-                            <span
-                                className="ml-2 text-white">Artist or Culture</span>
+                            <span className="ml-2 text-white">Artist or Culture</span>
                         </label>
-                        <label className="mr-4 flex items-center">
+                        <label className="flex items-center">
                             <input
                                 type="checkbox"
                                 name="hasImages"
                                 checked={searchParamsObj.hasImages ?? undefined}
                                 onChange={(event) => setHasImages(event.target.checked)}
-                                className="form-checkbox h-5 w-5 text-indigo-600"
+                                className="form-checkbox h-5 w-5 text-blue-600"
                             />
                             <span className="ml-2 text-white">Has Images</span>
                         </label>
                     </div>
-                    <hr className="w-60 white my-4"/>
-                    <div className="flex justify-center">
-                        <div>
-                            <label className="flex items-center flex-col">
-                                <span className="text-white">Department</span>
-                                <select
-                                    name="departmentId"
-                                    value={searchParamsObj.departmentId ?? ''}
-                                    onChange={(event) => setDepartmentId(Number(event.target.value))}
-                                    className="border border-gray-500 bg-transparent rounded-full px-4 py-2 text-white"
-                                >
-                                    <option value="">Select a department
+                    <div className="flex justify-between mb-4">
+                        <div className="flex flex-col">
+                            <label className="text-white mb-2">Department</label>
+                            <select
+                                name="departmentId"
+                                value={searchParamsObj.departmentId ?? ''}
+                                onChange={(event) => setDepartmentId(Number(event.target.value))}
+                                className="bg-gray-700 text-white rounded-full px-4 py-2 focus:outline-none"
+                            >
+                                <option value="">Select a department</option>
+                                {departments.map(department => (
+                                    <option key={department.departmentId} value={department.departmentId}>
+                                        {department.displayName}
                                     </option>
-                                    {departments.map(department => (
-                                        <option key={department.departmentId}
-                                                value={department.departmentId}>
-                                            {department.displayName}
-                                        </option>
-                                    ))}
-                                </select>
-                            </label>
+                                ))}
+                            </select>
                         </div>
-
-                    </div>
-                    <hr className="w-60 white my-4"/>
-                    <div className="flex justify-center">
-                        <label className="flex flex-col items-center">
-                            <span className="text-white">Medium</span>
+                        <div className="flex flex-col">
+                            <label className="text-white mb-2">Medium</label>
                             <input
                                 type="text"
                                 name="medium"
                                 value={searchParamsObj.medium ?? undefined}
                                 onChange={(event) => setMedium(event.target.value)}
-                                className="border border-gray-500 bg-transparent rounded-full px-4 py-2 text-white"
+                                className="bg-gray-700 text-white rounded-full px-4 py-2 focus:outline-none"
                             />
-                        </label>
-                    </div>
-                    <hr className="w-60 white my-4"/>
-                    <div className="flex justify-center">
-                        <label className="flex flex-col items-center">
-                            <span className="text-white">Geo Location</span>
+                        </div>
+                        <div className="flex flex-col">
+                            <label className="text-white mb-2">Geo Location</label>
                             <input
                                 type="text"
                                 name="geoLocation"
                                 value={searchParamsObj.geoLocation ?? undefined}
                                 onChange={(event) => setGeoLocation(event.target.value)}
-                                className="border border-gray-500 bg-transparent rounded-full px-4 py-2 text-white"
+                                className="bg-gray-700 text-white rounded-full px-4 py-2 focus:outline-none"
                             />
-                        </label>
+                        </div>
                     </div>
-                    <hr className="w-60 white my-4"/>
-                    <div className="flex flex-wrap justify-center flex-col">
-                        <label className="mr-4 flex items-center">
+                    <div className="flex justify-between mb-4">
+                        <div className="flex flex-col">
+                            <label className="text-white mb-2">Start Date</label>
                             <input
                                 type="number"
                                 name="dateBegin"
                                 value={searchParamsObj.dateBegin ?? '0'}
                                 onChange={(event) => setDateBegin(Number(event.target.value))}
-                                className="border border-gray-500 bg-transparent rounded-full px-4 py-2 text-white"
+                                className="bg-gray-700 text-white rounded-full px-4 py-2 focus:outline-none"
                             />
-                            <span className="ml-2 text-white">Start Date</span>
-                        </label>
-                        <label className="mr-4 flex items-center">
+                        </div>
+                        <div className="flex flex-col">
+                            <label className="text-white mb-2">End Date</label>
                             <input
                                 type="number"
                                 name="dateEnd"
                                 value={searchParamsObj.dateEnd ?? '0'}
                                 onChange={(event) => setDateEnd(Number(event.target.value))}
-                                className="border border-gray-500 bg-transparent rounded-full px-4 py-2 text-white"
+                                className="bg-gray-700 text-white rounded-full px-4 py-2 focus:outline-none"
                             />
-                            <span className="ml-2 text-white">End Date</span>
-                        </label>
-                        <label
-                            className="mr-4 flex items-center justify-center">
+                        </div>
+                        <div className="flex items-center mt-6">
                             <input
                                 type="checkbox"
                                 name="useDates"
                                 checked={useDates}
                                 onChange={(event) => setUseDates(event.target.checked)}
-                                className="form-checkbox h-5 w-5 text-indigo-600"
+                                className="form-checkbox h-5 w-5 text-blue-600"
                             />
-                            <span
-                                className="ml-2 text-white">Filter by dates</span>
-                        </label>
+                            <span className="ml-2 text-white">Filter by dates</span>
+                        </div>
                     </div>
-                    <hr className="w-60 white my-4"/>
-                    
-
                 </div>
             </form>
         </div>

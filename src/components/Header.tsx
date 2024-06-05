@@ -1,5 +1,6 @@
 ﻿import React from "react";
 import SearchBar from "./SearchBar.tsx";
+import NavBar from "./NavBar.tsx";
 
 interface HeaderProps {}
 
@@ -15,6 +16,7 @@ const Header: React.FC<HeaderProps> = () => {
                 </div>
             </div>
             <SearchBar/>
+            <NavBar/>
         </header>
     );
 };

@@ -72,7 +72,7 @@ const Carrousel: React.FC<CarrouselProps> = ({ objects }) => {
     };
 
     return (
-        <div className="relative mt-8 max-w-7xl mx-auto p-4 bg-gray-900 rounded-lg shadow-red-950-lg">
+        <div className="relative mt-10 max-w-7xl mx-auto p-4 bg-gray-900 rounded-lg shadow-red-950-lg">
             <Slider {...settings}>
                 {objects.slice(0, 20).map((object) => (
                     <div key={object.objectID} className="p-2 relative z-10">
