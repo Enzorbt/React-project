@@ -1,6 +1,6 @@
 ﻿import React from "react";
 
-const LoadingComponent: React.FC = ({  }) => {
+const LoadingComponent: React.FC = () => {
     return(
         <div className="flex justify-center items-center space-x-2 pt-4 pb-4">
             <div className="spinner-dot animate-bounce bg-white w-2 h-2 rounded-full"></div>

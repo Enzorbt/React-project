@@ -1,5 +1,5 @@
 import React from 'react';
-import PresentationType from "../types/PresentationType.tsx";
+import PresentationType from "../../types/PresentationType.tsx";
 import MetPresentation from "./MetPresentation.tsx";
 
 const MetPresentations: React.FC = () => {

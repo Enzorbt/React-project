@@ -1,10 +1,10 @@
 ﻿import React, { useState, useEffect } from "react";
-import ObjectsType from "../types/ObjectsType.tsx";
-import ObjectModel from "../models/ObjectModel.tsx";
+import ObjectsType from "../../types/ObjectsType.tsx";
+import ObjectModel from "../../models/ObjectModel.tsx";
 import SearchResult from "./SearchResult.tsx";
-import ObjectType from "../types/ObjectType.tsx";
-import { useFlashes } from "../providers/FlashesProvider.tsx";
-import LoadingComponent from "./LoadingComponent.tsx";
+import ObjectType from "../../types/ObjectType.tsx";
+import { useFlashes } from "../../providers/FlashesProvider.tsx";
+import LoadingComponent from "../loading/LoadingComponent.tsx";
 
 interface SearchResultsProps {
     searchResults: ObjectsType | undefined;

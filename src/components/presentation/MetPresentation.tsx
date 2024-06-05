@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import PresentationType from "../types/PresentationType.tsx";
+import PresentationType from "../../types/PresentationType.tsx";
 
 interface MetPresentationProps {
     item: PresentationType;

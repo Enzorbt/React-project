@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import ObjectType from "../types/ObjectType.tsx";
+import ObjectType from "../../types/ObjectType.tsx";
 import {Link} from "react-router-dom";
 
 interface HighlightProps {

@@ -1,9 +1,9 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import SearchParamsType from '../types/SearchParamsType';
-import DepartmentModel from "../models/DepartmentModel.tsx";
-import DepartmentType from "../types/DepartmentType.tsx";
-import { useFlashes } from "../providers/FlashesProvider.tsx";
+import SearchParamsType from '../../types/SearchParamsType.tsx';
+import DepartmentModel from "../../models/DepartmentModel.tsx";
+import DepartmentType from "../../types/DepartmentType.tsx";
+import { useFlashes } from "../../providers/FlashesProvider.tsx";
 
 interface AdvancedSearchBarProps {
     departmentModel: DepartmentModel;

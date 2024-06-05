@@ -1,9 +1,9 @@
-﻿import SearchModel from "../models/SearchModel.tsx";
+﻿import SearchModel from "../../models/SearchModel.tsx";
 import React, {useEffect, useState} from "react";
-import Carrousel from "./Carrousel.tsx";
-import ObjectType from "../types/ObjectType.tsx";
-import {useFlashes} from "../providers/FlashesProvider.tsx";
-import MetPresentations from "./MetPresentations.tsx";
+import Carrousel from "../carrousel/Carrousel.tsx";
+import ObjectType from "../../types/ObjectType.tsx";
+import {useFlashes} from "../../providers/FlashesProvider.tsx";
+import MetPresentations from "../presentation/MetPresentations.tsx";
 
 
 interface HomePageProps {

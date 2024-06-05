@@ -7,9 +7,9 @@ import {
     Routes
 } from 'react-router-dom';
 import App from './App';
-import HomePage from './components/HomePage';
-import AdvancedSearchPage from './components/AdvancedSearchPage';
-import ObjectPage from './components/ObjectPage';
+import HomePage from './components/homePage/HomePage.tsx';
+import AdvancedSearchPage from './components/search/AdvancedSearchPage.tsx';
+import ObjectPage from './components/object/ObjectPage.tsx';
 import SearchModel from './models/SearchModel';
 import ObjectModel from "./models/ObjectModel.tsx";
 import FlashesProvider from "./providers/FlashesProvider.tsx";
