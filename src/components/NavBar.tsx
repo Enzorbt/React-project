@@ -6,23 +6,23 @@ const Navbar = () => {
     return (
         <nav className="bg-black p-4 mt-8">
             <div className="container mx-auto flex justify-between space-x-4 text-white font-bold">
-                <Link to="/sculpture" className="hover:text-gray-400">
-                    Sculpture
-                </Link>
-                <Link to="/modern-art" className="text-white hover:text-gray-600 ">
+                <Link to="/search?departmentId=21&page=1" className="hover:text-gray-400">
                     Modern Art
                 </Link>
-                <Link to="/painting" className="text-white hover:text-gray-400">
-                    Painting
+                <Link to="/search?departmentId=17&page=1" className="text-white hover:text-gray-600 ">
+                    Medieval Art
                 </Link>
-                <Link to="/painting" className="text-white hover:text-gray-400">
-                    Gothic
+                <Link to="/search?departmentId=14&page=1" className="text-white hover:text-gray-400">
+                    Islamic Art
                 </Link>
-                <Link to="/painting" className="text-white hover:text-gray-400">
-                    Expos
+                <Link to="/search?departmentId=6&page=1" className="text-white hover:text-gray-400">
+                    Asian art
                 </Link>
-                <Link to="/painting" className="text-white hover:text-gray-400">
-                    Others
+                <Link to="/search?departmentId=10&page=1" className="text-white hover:text-gray-400">
+                    Egyptian Art
+                </Link>
+                <Link to="/search?departmentId=13&page=1" className="text-white hover:text-gray-400">
+                    Greek and Roman Art
                 </Link>
 
 

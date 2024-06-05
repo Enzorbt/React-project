@@ -90,6 +90,23 @@ const AdvancedSearchBar: React.FC<AdvancedSearchBarProps> = ({ departmentModel }
         setSearchParamsObj({ ...searchParamsObj, dateEnd });
     };
 
+    useEffect(() => {
+        setSearchParamsObj({
+            q: searchParams.get('q') === null ? '' : searchParams.get('q'),
+            isHighlight: searchParams.get('isHighlight') === null ? null : searchParams.get('isHighlight') === 'true',
+            title: searchParams.get('title') === null ? null : searchParams.get('title') === 'true',
+            tags: searchParams.get('tags') === null ? null : searchParams.get('tags') === 'true',
+            departmentId: searchParams.get('departmentId') ? Number(searchParams.get('departmentId')) : null,
+            isOnView: searchParams.get('isOnView') === null ? null : searchParams.get('isOnView') === 'true',
+            artistOrCulture: searchParams.get('artistOrCulture') === null ? null : searchParams.get('artistOrCulture') === 'true',
+            medium: searchParams.get('medium'),
+            hasImages: searchParams.get('hasImages') === null ? null : searchParams.get('hasImages') === 'true',
+            geoLocation: searchParams.get('geoLocation'),
+            dateBegin: searchParams.get('dateBegin') ? Number(searchParams.get('dateBegin')) : 0,
+            dateEnd: searchParams.get('dateEnd') ? Number(searchParams.get('dateEnd')) : 0,
+        })
+    }, [setSearchParamsObj, searchParams])
+
     const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         let queryString = '';

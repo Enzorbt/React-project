@@ -75,23 +75,18 @@ const AdvancedSearchPage: React.FC<AdvancedSearchPageProps> = ({
 
     return (
         <div className="min-h-screen bg-gray-900 text-white p-6">
+            <link rel="icon" type="image/svg+xml" href="/MMIcon.png"/>
             <div className="max-w-6xl mx-auto">
-                <AdvancedSearchBar departmentModel={departmentModel} />
-
-                {loading ? (
-                    <div className="flex justify-center items-center h-64">
-                        <div className="loader">Loading...</div>
-                    </div>
-                ) : (
-                    <SearchResults
-                        searchResults={searchResults}
-                        objectModel={objectModel}
-                        currentPage={currentPage}
-                        setCurrentPage={setCurrentPage}
-                        loading={loading}
-                        setLoading={setLoading}
-                    />
-                )}
+                <AdvancedSearchBar departmentModel={departmentModel}/>
+                
+                <SearchResults
+                    searchResults={searchResults}
+                    objectModel={objectModel}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    loading={loading}
+                    setLoading={setLoading}
+                />
             </div>
         </div>
     );
